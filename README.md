@@ -3,56 +3,114 @@
 [![R](https://img.shields.io/badge/R-276DC3?style=flat&logo=r&logoColor=white)](https://www.r-project.org/)
 [![Statistical Analysis](https://img.shields.io/badge/Statistical-Analysis-blue)](https://github.com/Mkpz/Sleep-Data-Analysis)
 [![Bayesian Modeling](https://img.shields.io/badge/Bayesian-Regression-green)](https://github.com/Mkpz/Sleep-Data-Analysis)
+[![ANOVA Testing](https://img.shields.io/badge/ANOVA-Testing-orange)](https://github.com/Mkpz/Sleep-Data-Analysis)
+[![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Decision%20Trees-red)](https://github.com/Mkpz/Sleep-Data-Analysis)
+[![Random Forest](https://img.shields.io/badge/Random-Forest-purple)](https://github.com/Mkpz/Sleep-Data-Analysis)
+[![Data Visualization](https://img.shields.io/badge/Data-Visualization-yellow)](https://github.com/Mkpz/Sleep-Data-Analysis)
+[![MCMC](https://img.shields.io/badge/MCMC-Diagnostics-teal)](https://github.com/Mkpz/Sleep-Data-Analysis)
 
 A comprehensive statistical analysis of American sleep patterns (2003-2017) using advanced regression techniques, ANOVA testing, and Bayesian prediction models to examine relationships between age, gender, and sleep duration across 945 observations.
 
-## 📊 Project Overview
+## Project Overview
 
-This project analyzes sleep data from the **American Time Use Survey** collected by the U.S. Bureau of Labor Statistics, investigating how sleep patterns vary by age group, gender, and day type over 14 years. The analysis combines hypothesis testing, multiple regression models, decision trees, random forests, and Bayesian prediction to provide comprehensive insights into American sleep habits.
+This project analyzes sleep data from the American Time Use Survey collected by the U.S. Bureau of Labor Statistics, investigating how sleep patterns vary by age group, gender, and day type over 14 years. The analysis combines hypothesis testing, multiple regression models, decision trees, random forests, and Bayesian prediction to provide comprehensive insights into American sleep habits.
 
 ### Key Findings
 
-- **15-24 years age group** sleeps the most (~9.9 hours average)
-- **45-54 years age group** sleeps the least (~8.3 hours average)  
-- **65+ age group** sleeps more than middle-aged groups but less than teenagers
-- **Type of day** and **Age group** are the most important predictors (18.9% and 16.5% importance)
+- 15-24 years age group sleeps the most (~9.9 hours average)
+- 45-54 years age group sleeps the least (~8.3 hours average)  
+- 65+ age group sleeps more than middle-aged groups but less than teenagers
+- Type of day and age group are the most important predictors (18.9% and 16.5% importance)
 - Sleep patterns show general increase over years despite economic/political events
-- **Weekend days** show higher sleep hours than non-holiday weekdays
+- Weekend days show higher sleep hours than non-holiday weekdays
 
-## 🎯 Research Questions
+## Research Questions
 
-1. **Do different age groups have significantly different average sleep times?**
-2. **Which age group has the highest average sleep time?**
-3. **How do sleep patterns vary by day type (weekday vs. weekend)?**
-4. **Can we predict sleep hours based on demographic and temporal factors?**
+1. Do different age groups have significantly different average sleep times?
+2. Which age group has the highest average sleep time?
+3. How do sleep patterns vary by day type (weekday vs. weekend)?
+4. Can we predict sleep hours based on demographic and temporal factors?
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
-sleep-data-analysis/
+Sleep-Data-Analysis/
 │
-├── Sleep_Data_Analysis_Code.R        # Complete analysis code
-├── Sleep_Data_Analysis_Project.pdf   # Comprehensive written report
-├── Sleep_Data_Analysis_Presentation.pptx  # Visual presentation slides
-├── README.md                         # Project documentation
-│
-├── data/
-│   └── TimeSleeping.csv             # American Time Use Survey data
-│
-├── visualizations/
-│   ├── age_group_barplot.png       # Average sleep by age group
-│   ├── temporal_trends.png         # Sleep trends 2003-2017
-│   ├── stacked_barplots.png        # Sleep deprivation patterns
-│   ├── piechart.png                # Type of days distribution
-│   └── decision_tree.png           # Classification tree results
-│
-└── predictions/
-    ├── Avg.sleep.hours.predictions.csv    # Linear model predictions
-    ├── Avg.sleep.hours.predictions1.csv   # Interaction model predictions
-    └── Avg.sleep.hours.predictions2.csv   # Full model predictions
+├── Sleep Data Analysis Code.R           # Complete analysis code
+├── Sleep Data Analysis Project.pdf      # Comprehensive written report
+├── Sleep Data Analysis Presentation.pptx # Visual presentation slides
+├── Errorfunction.R                      # Custom error function for model evaluation
+└── README.md                            # Project documentation
 ```
 
-## 🛠️ Technologies & Methods
+## Getting Started
+
+### Prerequisites
+
+```r
+# Required R version
+R >= 4.0.0
+
+# Install required packages
+install.packages(c("tree", "rpart", "randomForest", "rstanarm", 
+                   "ggplot2", "dplyr", "leaps", "lars", "olsrr",
+                   "rpart.plot", "corrplot", "wesanderson"))
+```
+
+### Running the Analysis
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/Sleep-Data-Analysis.git
+cd Sleep-Data-Analysis
+```
+
+2. Load the error function:
+```r
+# Load custom error function for model evaluation
+source("Errorfunction.R")
+
+# Custom error function for model evaluation
+regr.error <- function(predicted, actual) {
+  mae <- mean(abs(actual - predicted))
+  mse <- mean((actual - predicted)^2)
+  rmse <- sqrt(mse)
+  mape <- mean(abs((actual - predicted) / actual))
+  c(mae = mae, mse = mse, rmse = rmse, mape = mape)
+}
+```
+
+3. Run complete analysis:
+```r
+source("Sleep Data Analysis Code.R")
+
+# Or run sections individually:
+# - Data loading and preprocessing
+# - ANOVA and hypothesis testing
+# - Decision trees and random forests
+# - Regression models
+# - Bayesian predictions
+```
+
+4. View results:
+- Review PDF report for comprehensive findings
+- Examine PowerPoint presentation for visual summary
+
+## Dataset Information
+
+**Source**: American Time Use Survey (U.S. Bureau of Labor Statistics)  
+**Time Period**: 2003-2017  
+**Sample Size**: 945 observations  
+
+**Variables**:
+- `Year`: Survey year (2003-2017)
+- `AvgHours`: Average hours per day sleeping
+- `Standard.Error`: Statistical error measure
+- `Type.of.Days`: All days / Nonholiday weekdays / Weekend days and holidays
+- `Age.Group`: 7 categories (15-24, 25-34, 35-44, 45-54, 55-64, 65+, 15+)
+- `Sex`: Men / Women / Both
+
+## Technologies & Methods
 
 ### Programming & Statistical Tools
 - **Language**: R
@@ -67,23 +125,23 @@ sleep-data-analysis/
 
 ### Statistical Methods Implemented
 
-#### 1. **ANOVA Testing**
+**1. ANOVA Testing**
 - **Hypothesis 1**: Each age group has different average sleep times
 - **Result**: All F-values significant (p < 2e-16) → Reject H₀
 - **Conclusion**: Age groups differ significantly in sleep duration
 
-#### 2. **Pairwise t-tests with Bonferroni Correction**
+**2. Pairwise t-tests with Bonferroni Correction**
 - **Adjusted α**: 0.05/21 = 0.00238
 - **Key Finding**: 15-24 years vs. 45-54 years most significantly different (p < 2e-16)
 
-#### 3. **Tukey HSD Post-Hoc Tests**
-- **15-24 years** sleep 1.02 hours more than **45-54 years** (p < 0.001)
-- **65+ years** sleep 0.53 hours less than **15-24 years** (p < 0.001)
+**3. Tukey HSD Post-Hoc Tests**
+- 15-24 years sleep 1.02 hours more than 45-54 years (p < 0.001)
+- 65+ years sleep 0.53 hours less than 15-24 years (p < 0.001)
 - All pairwise comparisons revealed significant differences except:
   - 15 years and over ↔ 25-34 years (p = 0.999)
   - 55-64 years ↔ 45-54 years (p = 1.000)
 
-## 📈 Analysis Results
+## Analysis Results
 
 ### Age Group Sleep Patterns
 
@@ -133,7 +191,7 @@ sleep-data-analysis/
 - 15-24 years: ALL sleep >9 hours (dramatic improvement!)
 - 65+ years: Only group with sleep deprivation
 
-## 🤖 Machine Learning Models
+## Machine Learning Models
 
 ### Decision Tree Results
 
@@ -174,18 +232,18 @@ sleep-data-analysis/
 
 | Model | RMSE | MAE | Features |
 |-------|------|-----|----------|
-| **Model 1** (Basic) | 0.7728 | 0.6275 | Age, Sex, Type of Days, Year |
-| **Model 2** (Interactions) | **0.7688** | 0.6223 | + Age:Sex, Type:Sex, Year:Age, Year:Type |
-| **Model 3** (Full) | 0.7704 | 0.6238 | + Year:Sex |
+| Model 1 (Basic) | 0.7728 | 0.6275 | Age, Sex, Type of Days, Year |
+| Model 2 (Interactions) | 0.7688 | 0.6223 | + Age:Sex, Type:Sex, Year:Age, Year:Type |
+| Model 3 (Full) | 0.7704 | 0.6238 | + Year:Sex |
 
 **Best Model**: Model 2 with interaction terms (lowest RMSE)
 
 **Model Selection Criteria**:
-- **Lowest BIC**: Model 1 (-520.62)
-- **Lowest AIC**: Model 2 (-697.56)
-- **Best Prediction**: Model 2 (RMSE = 0.7688)
+- Lowest BIC: Model 1 (-520.62)
+- Lowest AIC: Model 2 (-697.56)
+- Best Prediction: Model 2 (RMSE = 0.7688)
 
-## 🎲 Bayesian Prediction Analysis
+## Bayesian Prediction Analysis
 
 ### Model Specification
 
@@ -210,71 +268,17 @@ stan_glm(AvgHours ~ Gender + Year + Age +
 | Age 6 (55-64 years) | 8.52 |
 | Age 7 (65+ years) | 8.46 |
 
-**Trend**: As age increases, predicted average sleep hours **decrease**  
+**Trend**: As age increases, predicted average sleep hours decrease  
 **Validation**: Supports hypothesis that middle-aged groups sleep less than younger groups
 
 ### MCMC Diagnostics
-- ✅ Chains mixed well (trace plots converged)
-- ✅ Sufficient chain length (density overlays consistent)
-- ✅ Low autocorrelation (ACF plots acceptable)
-- ✅ Sample size ratio >10% (adequate data)
-- ✅ R-hat close to 1.0 (<1.05) (stable simulation)
+- Chains mixed well (trace plots converged)
+- Sufficient chain length (density overlays consistent)
+- Low autocorrelation (ACF plots acceptable)
+- Sample size ratio >10% (adequate data)
+- R-hat close to 1.0 (<1.05) (stable simulation)
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-```r
-# Required R version
-R >= 4.0.0
-
-# Install required packages
-install.packages(c("tree", "rpart", "randomForest", "rstanarm", 
-                   "ggplot2", "dplyr", "leaps", "lars", "olsrr",
-                   "rpart.plot", "corrplot", "wesanderson"))
-```
-
-### Running the Analysis
-
-1. **Clone the repository**:
-```bash
-git clone https://github.com/yourusername/sleep-data-analysis.git
-cd sleep-data-analysis
-```
-
-2. **Load the error function**:
-```r
-# Place Errorfunction.R in your working directory
-source("Errorfunction.R")
-
-# Custom error function for model evaluation
-regr.error <- function(predicted, actual) {
-  mae <- mean(abs(actual - predicted))
-  mse <- mean((actual - predicted)^2)
-  rmse <- sqrt(mse)
-  mape <- mean(abs((actual - predicted) / actual))
-  c(mae = mae, mse = mse, rmse = rmse, mape = mape)
-}
-```
-
-3. **Run complete analysis**:
-```r
-source("Sleep_Data_Analysis_Code.R")
-
-# Or run sections individually:
-# - Data loading and preprocessing
-# - ANOVA and hypothesis testing
-# - Decision trees and random forests
-# - Regression models
-# - Bayesian predictions
-```
-
-4. **View results**:
-- Check `predictions/` folder for model outputs
-- Review PDF report for comprehensive findings
-- Examine PowerPoint presentation for visual summary
-
-## 📊 Data Visualizations
+## Data Visualizations
 
 ### Created Visualizations
 
@@ -298,7 +302,7 @@ source("Sleep_Data_Analysis_Code.R")
 5. **Decision Tree Diagrams**:
    - Visual representation of sleep pattern classification
 
-## 🎓 Conclusions
+## Conclusions
 
 ### Major Findings
 
@@ -322,48 +326,6 @@ source("Sleep_Data_Analysis_Code.R")
 - **Policy**: Weekend sleep recovery is critical for younger age groups
 - **Research**: Sleep patterns influenced more by routine (weekday/weekend) than demographics
 - **Education**: Teenagers' higher sleep needs should inform school start times
-
-## 🤝 Skills Demonstrated
-
-- **Advanced Statistical Testing**: ANOVA, Bonferroni correction, Tukey HSD
-- **Machine Learning**: Decision trees, random forests, regression models
-- **Bayesian Statistics**: MCMC sampling, posterior prediction, model diagnostics
-- **R Programming**: Complex data manipulation, custom functions, model comparison
-- **Data Visualization**: Multiple plot types for comprehensive insights
-- **Research Communication**: Technical report writing, presentation design
-- **Model Selection**: BIC/AIC comparison, RMSE evaluation, cross-validation
-
-## 📚 Dataset Information
-
-**Source**: American Time Use Survey (U.S. Bureau of Labor Statistics)  
-**Time Period**: 2003-2017  
-**Sample Size**: 945 observations  
-
-**Variables**:
-- `Year`: Survey year (2003-2017)
-- `AvgHours`: Average hours per day sleeping
-- `Standard.Error`: Statistical error measure
-- `Type.of.Days`: All days / Nonholiday weekdays / Weekend days and holidays
-- `Age.Group`: 7 categories (15-24, 25-34, 35-44, 45-54, 55-64, 65+, 15+)
-- `Sex`: Men / Women / Both
-
-## 📄 Citation
-
-If using this analysis or methodology:
-
-```
-Patel, M. (2024). Sleep Patterns Analysis: Age, Gender & Time Trends 
-in American Sleep Habits (2003-2017). 
-Rutgers University Statistical Analysis Project.
-```
-
-## 📧 Contact
-
-**Mahek Patel**  
-
-## 🌟 Key Takeaway
-
-> "Sleep patterns are complex and multifaceted. Our analysis reveals that age and daily routine (weekday vs. weekend) are the strongest determinants of sleep duration. Middle-aged Americans face the greatest sleep deficits, highlighting the need for targeted public health interventions."
 
 ---
 
